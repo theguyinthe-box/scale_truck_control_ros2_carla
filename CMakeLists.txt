@@ -22,6 +22,7 @@ find_package(geometry_msgs REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(ros2_msg REQUIRED)
+find_package(ackermann_msgs REQUIRED)
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Quick REQUIRED)
@@ -77,7 +78,7 @@ add_executable(control_node src/scale_truck_control.cpp)
 ament_target_dependencies(control_node rclcpp std_msgs ros2_msg)
 
 add_executable(carla_control_node src/carla_ocr.cpp)
-ament_target_dependencies(carla_control_node rclcpp std_msgs ros2_msg)
+ament_target_dependencies(carla_control_node rclcpp ackermann_msgs std_msgs ros2_msg)
 
 target_link_libraries(controller
   Qt5::Core
