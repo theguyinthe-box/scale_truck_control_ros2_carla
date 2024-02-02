@@ -76,6 +76,9 @@ ament_target_dependencies(lrc_node rclcpp std_msgs ros2_msg)
 add_executable(control_node src/scale_truck_control.cpp)
 ament_target_dependencies(control_node rclcpp std_msgs ros2_msg)
 
+add_executable(carla_control_node src/carla_ocr.cpp)
+ament_target_dependencies(carla_control_node rclcpp std_msgs ros2_msg)
+
 target_link_libraries(controller
   Qt5::Core
   Qt5::Quick
@@ -86,6 +89,7 @@ install(TARGETS
 	lrc_node
 	control_node
 	controller
+  carla_control_node
 	DESTINATION lib/${PROJECT_NAME}
 )
 install(DIRECTORY

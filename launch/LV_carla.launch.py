@@ -41,18 +41,19 @@ def generate_launch_description():
             'LV.yaml')                 
 
     # Node #
-    usb_cam_node=Node(
-            package='usb_cam',
-            namespace='LV',
-            name='usb_cam',
-            executable='usb_cam_node_exe',
-                        parameters=[
-                PathJoinSubstitution([
-                        get_package_share_directory('scale_truck_control_ros2'),
-                        'config', 'camera_params.yaml',
-                        ])],
-            remappings=[('image_raw', 'usb_cam/image_raw')],
-            output='screen')
+### TODO: instead of launching camera, remap Carla camera topic
+#    usb_cam_node=Node(
+#            package='usb_cam',
+#            namespace='LV',
+#            name='usb_cam',
+#            executable='usb_cam_node_exe',
+#                        parameters=[
+#                PathJoinSubstitution([
+#                        get_package_share_directory('scale_truck_control_ros2'),
+#                        'config', 'camera_params.yaml',
+#                        ])],
+#            remappings=[('image_raw', 'usb_cam/image_raw')],
+#            output='screen')
 
 #    rplidarS2_node=Node(
 #            package='rplidar_ros2',
@@ -67,18 +68,19 @@ def generate_launch_description():
 #                         'scan_mode':scan_mode}],
 #            output='screen')         
 
-    rplidarA3_node=Node(
-            package='rplidar_ros2',
-            namespace='LV',
-            executable='rplidar_scan_publisher',
-            name='rplidar_scan_publisher',
-            parameters=[{'serial_port': serial_port, 
-                         'serial_baudrate': serial_baudrate, 
-                         'frame_id': frame_id,
-                         'inverted': inverted, 
-                         'angle_compensate': angle_compensate, 
-                         'scan_mode': scan_mode}],
-            output='screen')
+### TODO: instead of launching lidar, remap Carla lidar topic
+#    rplidarA3_node=Node(
+#            package='rplidar_ros2',
+#            namespace='LV',
+#            executable='rplidar_scan_publisher',
+#            name='rplidar_scan_publisher',
+#            parameters=[{'serial_port': serial_port, 
+#                         'serial_baudrate': serial_baudrate, 
+#                         'frame_id': frame_id,
+#                         'inverted': inverted, 
+#                         'angle_compensate': angle_compensate, 
+#                         'scan_mode': scan_mode}],
+#            output='screen')
                 
     laserfilter_node=Node(
             package="laser_filters",
@@ -125,12 +127,10 @@ def generate_launch_description():
             output='screen')
 
     opencr_node=Node(
-            package='micro_ros_agent', 
-            name='opencr', 
+            package='scale_truck_control_ros2', 
+            name='carla_control', 
             namespace='LV', 
-            executable='micro_ros_agent', 
-            arguments=["udp4", "-p", "8888", "-v6"]
-            #arguments = ["serial", "--dev", "/dev/ttyACM0"]
+            executable='carla_control_node', 
             )
 
     ld = LaunchDescription()
