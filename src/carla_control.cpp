@@ -1,4 +1,4 @@
-gg#include "carla_control/CarlaControl.hpp"
+#include "carla_control/CarlaControl.hpp"
 
 using namespace std::chrono_literals;
 
@@ -17,6 +17,12 @@ CarlaControl::~CarlaControl(){
 }
 
 void CarlaControl::init(){
+
+  std::string LrcSubTopicName;
+  int LrcSubQueueSize;
+  std::string CarlaPubTopicName;
+  int CarlaPubQueueSize;
+
   /******************************/
   /* ROS Topic Subscribe Option */
   /******************************/
@@ -26,7 +32,7 @@ void CarlaControl::init(){
   /******************************/
   /* ROS Topic Publish Option */
   /******************************/
-  this->get_parameter_or("OcrPub/ocr_to_carla/topic", CarlaPubTopicName, std::string("carla_ackermann_msg"));
+  this->get_parameter_or("OcrPub/ocr_to_carla/topic", CarlaPubTopicName, std::string("/carla/hero/ackermann_cmd"));
   this->get_parameter_or("OcrPub/ocr_to_carla/queue_size", CarlaPubQueueSize, 1);
 
   /************************/
@@ -49,7 +55,7 @@ void CarlaControl::LrcCallback(const ros2_msg::msg::Lrc2ocr::SharedPtr msg)
 
   ackermann_msgs::msg::AckermannDrive carla_msg;
   carla_msg.steering_angle = steer_angle_;
-  carla_msg.steer.steering_angle_velocity = 0;
+  carla_msg.steering_angle_velocity = 0;
   carla_msg.speed = tar_vel_;
   carla_msg.acceleration = 0;
   carla_msg.jerk = 0;
@@ -67,4 +73,3 @@ int main(int argc, char* argv[]){
     rclcpp::shutdown();
     return 0;
 }
-
