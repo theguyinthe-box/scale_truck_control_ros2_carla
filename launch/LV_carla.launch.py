@@ -23,34 +23,8 @@ def generate_launch_description():
             'LV.yaml')                 
 
     # Node #
-### TODO: instead of launching camera, remap Carla camera topic
-#    usb_cam_node=Node(
-#            package='usb_cam',
-#            namespace='LV',
-#            name='usb_cam',
-#            executable='usb_cam_node_exe',
-#                        parameters=[
-#                PathJoinSubstitution([
-#                        get_package_share_directory('scale_truck_control_ros2'),
-#                        'config', 'camera_params.yaml',
-#                        ])],
-#            remappings=[('image_raw', 'usb_cam/image_raw')],
-#            output='screen')
+    # camera and lidar topics remapped from Carla ROS2 Bridge
 
-### TODO: instead of launching lidar, remap Carla lidar topic
-#    rplidarA3_node=Node(
-#            package='rplidar_ros2',
-#            namespace='LV',
-#            executable='rplidar_scan_publisher',
-#            name='rplidar_scan_publisher',
-#            parameters=[{'serial_port': serial_port, 
-#                         'serial_baudrate': serial_baudrate, 
-#                         'frame_id': frame_id,
-#                         'inverted': inverted, 
-#                         'angle_compensate': angle_compensate, 
-#                         'scan_mode': scan_mode}],
-#            output='screen')
-                
     laserfilter_node=Node(
             package="laser_filters",
             namespace='LV',
@@ -114,5 +88,3 @@ def generate_launch_description():
     ld.add_action(opencr_node)
 
     return ld
-
-
