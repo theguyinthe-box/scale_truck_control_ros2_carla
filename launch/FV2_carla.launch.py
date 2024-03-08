@@ -13,14 +13,14 @@ from launch.substitutions import PathJoinSubstitution
 def generate_launch_description():
 
     ros_param_file = os.path.join(
-            get_package_share_directory('scale_truck_control_ros2'), 
-            'config', 
-            'config.yaml')                 
-    
+        get_package_share_directory('scale_truck_control_ros2'),
+        'config',
+        'config.yaml')
+
     lane_param_file = os.path.join(
-            get_package_share_directory('scale_truck_control_ros2'), 
-            'config', 
-            'LV.yaml')
+        get_package_share_directory('scale_truck_control_ros2'),
+        'config',
+        'FV2.yaml')
 
     # Node #
     # camera and lidar topics remapped from Carla ROS2 Bridge
@@ -37,47 +37,47 @@ def generate_launch_description():
 ##            output='screen',)
 
     object_node=Node(
-            package="object_detection_ros2",
-            namespace='LV',
-            executable="object_detection_ros2_node",
-            output={
+        package="object_detection_ros2",
+        namespace='LV',
+        executable="object_detection_ros2_node",
+        output={
             'stdout': 'screen',
             'stderr': 'screen',
-            })
+        })
 
     lane_detection_node=Node(
-            package='lane_detection_ros2',
-            namespace='LV',
-            name='LaneDetector', # .yaml에 명시.
-            executable='lane_detect_node',
-            output='screen',
-            parameters = [lane_param_file])
+        package='lane_detection_ros2',
+        namespace='LV',
+        name='LaneDetector', # .yaml에 명시.
+        executable='lane_detect_node',
+        output='screen',
+        parameters = [lane_param_file])
 
     control_node=Node(
-            package='scale_truck_control_ros2', 
-            namespace='LV', 
-            name='scale_truck_control_node', 
-            executable='control_node', 
-            output='screen',
-            parameters = [ros_param_file])
+        package='scale_truck_control_ros2',
+        namespace='LV',
+        name='scale_truck_control_node',
+        executable='control_node',
+        output='screen',
+        parameters = [ros_param_file])
 
     lrc_node=Node(
-            package='scale_truck_control_ros2', 
-            namespace='LV', 
-            name='LRC', 
-            executable='lrc_node', 
-            parameters = [ros_param_file],
-            output='screen')
+        package='scale_truck_control_ros2',
+        namespace='LV',
+        name='LRC',
+        executable='lrc_node',
+        parameters = [ros_param_file],
+        output='screen')
 
     opencr_node=Node(
-            package='scale_truck_control_ros2', 
-            name='carla_control', 
-            namespace='LV', 
-            executable='carla_control_node', 
-            )
+        package='scale_truck_control_ros2',
+        name='carla_control',
+        namespace='LV',
+        executable='carla_control_node',
+    )
 
     ld = LaunchDescription()
-    
+
     #ld.add_action(usb_cam_node)
     ld.add_action(lane_detection_node)
     #ld.add_action(rplidarA3_node)

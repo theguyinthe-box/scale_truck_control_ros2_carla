@@ -58,13 +58,13 @@ def generate_launch_description():
             namespace='FV1',
             executable='rplidar_scan_publisher',
             name='rplidar_scan_publisher',
-            parameters=[{'serial_port': serial_port, 
-                         'serial_baudrate': serial_baudrate, 
+            parameters=[{'serial_port': serial_port,
+                         'serial_baudrate': serial_baudrate,
                          'frame_id': frame_id,
-                         'inverted': inverted, 
+                         'inverted': inverted,
                          'angle_compensate': angle_compensate,
                          'scan_mode':scan_mode}],
-            output='screen')         
+            output='screen')
 
     laserfilter_node=Node(
             package="laser_filters",

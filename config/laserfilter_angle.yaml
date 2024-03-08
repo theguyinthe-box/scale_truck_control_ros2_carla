@@ -4,6 +4,6 @@
       name: angle_filter
       type: laser_filters/LaserScanAngularBoundsFilterInPlace
       params:
-        lower_angle: -2.6
+        lower_angle: -2.6 #these are in deg, not rad. effectively it's a 2d lidar. --AK
         upper_angle: 2.6
 

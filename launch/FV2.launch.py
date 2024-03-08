@@ -53,32 +53,32 @@ def generate_launch_description():
             remappings=[('image_raw', 'usb_cam/image_raw')],
             output='screen')
 
-#    rplidarS2_node=Node(
-#            package='rplidar_ros2',
-#            namespace='FV2',
-#            executable='rplidar_scan_publisher',
-#            name='rplidar_scan_publisher',
-#            parameters=[{'serial_port': serial_port, 
-#                         'serial_baudrate': serial_baudrate, 
-#                         'frame_id': frame_id,
-#                         'inverted': inverted, 
-#                         'angle_compensate': angle_compensate,
-#                         'scan_mode':scan_mode}],
-#            output='screen')         
+    rplidarS2_node=Node(
+            package='rplidar_ros2',
+            namespace='FV2',
+            executable='rplidar_scan_publisher',
+            name='rplidar_scan_publisher',
+            parameters=[{'serial_port': serial_port,
+                         'serial_baudrate': serial_baudrate,
+                         'frame_id': frame_id,
+                         'inverted': inverted,
+                         'angle_compensate': angle_compensate,
+                         'scan_mode':scan_mode}],
+            output='screen')
 
     rplidarA3_node=Node(
             package='rplidar_ros2',
             namespace='FV2',
             executable='rplidar_scan_publisher',
             name='rplidar_scan_publisher',
-            parameters=[{'serial_port': serial_port, 
-                         'serial_baudrate': serial_baudrate, 
+            parameters=[{'serial_port': serial_port,
+                         'serial_baudrate': serial_baudrate,
                          'frame_id': frame_id,
-                         'inverted': inverted, 
-                         'angle_compensate': angle_compensate, 
+                         'inverted': inverted,
+                         'angle_compensate': angle_compensate,
                          'scan_mode': scan_mode}],
             output='screen')
-                
+
     laserfilter_node=Node(
             package='laser_filters',
             namespace='FV2',
@@ -136,7 +136,7 @@ def generate_launch_description():
     ld.add_action(usb_cam_node)
     ld.add_action(lane_detection_node)
     ld.add_action(rplidarA3_node)
-#    ld.add_action(rplidarS2_node)
+    ld.add_action(rplidarS2_node)
     ld.add_action(laserfilter_node)
     ld.add_action(object_node)
     ld.add_action(control_node)
