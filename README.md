@@ -160,15 +160,7 @@ mkdir -p ~/ros2_ws/src
 >- No --allow-overriding 'packages'
  ```
  cd ~/ros2_ws/src
- git clone -b galactic https://github.com/ros-perception/vision_opencv.git
- ```
- ```
- cd vision_opencv/cv_bridge
- vim CMakeLists.txt
-
- # fix the below
- --find_package(OpenCV 4 QUIET
- ++find_package(OpenCV 4.4 QUIET
+ git clone -b galactic https://github.com/theguyinthe-box/vision_opencv.git
  ```
  ```
  cd ~/ros2_ws
